@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LoginForm from '../components/LoginForm';
 
 export default function HomePage() {
-  const [topVinyl, setTopVinyl] = useState([]);
-
-  useEffect(() => {
-    const fetchTopVinyl = async () => {
-      try {
-        // This is a placeholder for fetching data from the backend
-        const response = await fetch('/api/top-vinyl');
-        const data = await response.json();
-        setTopVinyl(data);
-      } catch (error) {
-        console.error('Error fetching top vinyl:', error);
-      }
-    };
-
-    fetchTopVinyl();
-  }, []);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <>
-      <h1>Welcome to Media Collection Manager</h1>
-      <p>Track and value your physical media collections.</p>
-
-      <h2>Top 5 Most Expensive Vinyl Records</h2>
-      <ul>
-        {topVinyl.map((item, index) => (
-          <li key={index}>
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              {item.title} - ${item.price}
-            </a>
-          </li>
-        ))}
+    <div className="container">
+      <h1>Physical Media Cataloging Site</h1>
+      <p>Top 5 most expensive vinyl right now:</p>
+      <ul className="top-5-list">
+        <li>Artist: Title $price</li>
+        <li>Artist: Title $price</li>
+        <li>Artist: Title $price</li>
+        <li>Artist: Title $price</li>
+        <li>Artist: Title $price</li>
       </ul>
-
-      <LoginForm />
-    </>
+      <LoginForm isSignUp={isSignUp} />
+      <button className="toggle-button" onClick={() => setIsSignUp(!isSignUp)}>
+        {isSignUp ? 'Switch to Log In' : 'Switch to Sign Up'}
+      </button>
+    </div>
   );
 }
+
