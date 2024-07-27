@@ -6,34 +6,6 @@
   vertical-align: middle;
 }
 
-/* HomePage Styles */
-.homepage-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.homepage-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  max-width: 900px; /* Reduced max-width to fit better */
-  margin: 0 auto;
-  gap: 20px;
-}
-
-.image-container {
-  margin-top: 20px;
-}
-
-.home-image {
-  max-width: 50%; /* Reduced image size */
-  height: auto;
-}
-
 /* General Body Styles */
 body {
   font-family: Arial, sans-serif;
@@ -73,6 +45,39 @@ header, footer {
   text-decoration: underline;
 }
 
+/* HomePage Styles */
+.homepage-container,
+.collection-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.homepage-content,
+.collection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.image-container,
+.collection-image-container {
+  margin-top: 20px;
+  text-align: center; /* Center-align the container */
+}
+
+.home-image,
+.collection-image {
+  max-width: 50%; /* Adjust as necessary */
+  height: auto;
+}
+
 /* Container Styles */
 .container {
   width: 90%;
@@ -92,15 +97,19 @@ h1 {
 }
 
 /* Form Styles */
-form {
+form,
+.collection-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   max-width: 600px;
+  margin-bottom: 40px; /* Add more space below the form */
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -131,7 +140,8 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 5px; /* Reduced margin-top */
+  margin-bottom: 40px; /* Add more space below the toggle button */
 }
 
 .toggle-button:hover {
@@ -139,12 +149,6 @@ button:hover {
 }
 
 /* Collection Page Styles */
-.collection-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .collection-list {
   list-style-type: none;
   padding: 0;
@@ -158,15 +162,6 @@ button:hover {
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
-}
-
-.collection-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 600px;
-  margin: 20px 0;
 }
 
 /* Footer Styles */

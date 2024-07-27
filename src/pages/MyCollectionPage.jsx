@@ -1,18 +1,21 @@
 import React from 'react';
-import VHSImage from '../assets/vhs.jpg';
+import vhsImage from '../assets/vhs.jpg';
 
 export default function MyCollectionPage() {
   return (
-    <div className="container">
-      <h1>Welcome, [Username]</h1>
-      <p>Here's your collection and its estimated value.</p>
+    <div className="collection-page-container">
+      <h1>Welcome, [username]</h1>
+      <div className="collection-image-container">
+        <img src={vhsImage} alt="VHS" className="collection-image" />
+      </div>
       <div className="collection-container">
         <ul className="collection-list">
-          <li>Item 1 - $10</li>
-          <li>Item 2 - $20</li>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
         </ul>
         <form className="collection-form">
-          <select name="format" id="format">
+          <select>
             <option value="vinyl">Vinyl</option>
             <option value="cd">CD</option>
             <option value="dvd">DVD</option>
@@ -25,12 +28,10 @@ export default function MyCollectionPage() {
           <input type="text" placeholder="Artist" />
           <button type="submit">Add to Collection</button>
         </form>
-        <div className="image-container">
-          <img src={VHSImage} alt="VHS" className="home-image" />
-        </div>
       </div>
     </div>
   );
 }
+
 
 
