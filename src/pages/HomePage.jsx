@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
-import { registerUser, loginUser } from '../services/api'; // Import API functions
+import { registerUser, loginUser } from '../services/api';
+import LoginForm from '../components/LoginForm';
 
 export default function HomePage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -44,33 +45,13 @@ export default function HomePage() {
             <img src={cassetteImage} alt="Cassette" className="home-image" />
           </div>
           <div className="form-container">
-            <form onSubmit={onSubmit}>
-              {isSignUp && (
-                <input
-                  type="text"
-                  placeholder="Username"
-                  name="username"
-                  value={username}
-                  onChange={onChange}
-                />
-              )}
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={onChange}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={onChange}
-              />
-              <button type="submit">{isSignUp ? 'Sign Up' : 'Log In'}</button>
-            </form>
-            {error && <p className="error-message">{error}</p>}
+            <LoginForm
+              isSignUp={isSignUp}
+              formData={formData}
+              onChange={onChange}
+              onSubmit={onSubmit}
+              error={error}
+            />
             <button className="toggle-button" onClick={() => setIsSignUp(!isSignUp)}>
               {isSignUp ? 'Switch to Log In' : 'Switch to Sign Up'}
             </button>
@@ -80,4 +61,3 @@ export default function HomePage() {
     </div>
   );
 }
-
