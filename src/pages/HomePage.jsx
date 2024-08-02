@@ -1,8 +1,39 @@
 import React, { useState } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
+import { registerUser, loginUser } from '../services/api'; // Import API functions
 
 export default function HomePage() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [error, setError] = useState(null);
+
+  const { username, email, password } = formData;
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (isSignUp) {
+        const response = await registerUser({ username, email, password });
+        console.log('User registered successfully:', response);
+      } else {
+        const response = await loginUser({ email, password });
+        console.log('User logged in successfully:', response);
+        // Handle storing the token and user redirection
+      }
+      setError(null); // Clear any previous errors
+    } catch (err) {
+      console.error('Authentication error:', err);
+      setError('Authentication failed. Please check your details and try again.');
+    }
+  };
 
   return (
     <div className="homepage-container">
@@ -13,14 +44,33 @@ export default function HomePage() {
             <img src={cassetteImage} alt="Cassette" className="home-image" />
           </div>
           <div className="form-container">
-            <form>
+            <form onSubmit={onSubmit}>
               {isSignUp && (
-                <input type="email" placeholder="Email" />
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  value={username}
+                  onChange={onChange}
+                />
               )}
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={onChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={onChange}
+              />
               <button type="submit">{isSignUp ? 'Sign Up' : 'Log In'}</button>
             </form>
+            {error && <p className="error-message">{error}</p>}
             <button className="toggle-button" onClick={() => setIsSignUp(!isSignUp)}>
               {isSignUp ? 'Switch to Log In' : 'Switch to Sign Up'}
             </button>
@@ -30,11 +80,4 @@ export default function HomePage() {
     </div>
   );
 }
-
-
-
-
-
-
-
 
