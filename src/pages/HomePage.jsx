@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
 import { registerUser, loginUser } from '../services/api';
 import LoginForm from '../components/LoginForm';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -11,6 +12,7 @@ export default function HomePage() {
     password: '',
   });
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const { username, email, password } = formData;
 
@@ -24,19 +26,16 @@ export default function HomePage() {
       if (isSignUp) {
         const response = await registerUser({ username, email, password });
         console.log('User registered successfully:', response);
-        setError('User registered successfully. Please check your email to verify your account.');
       } else {
         const response = await loginUser({ email, password });
         console.log('User logged in successfully:', response);
-        setError(null); 
+        localStorage.setItem('token', response.token); // Save token to local storage
+        navigate('/my-collection'); // Redirect to collection page
       }
+      setError(null); // Clear any previous errors
     } catch (err) {
       console.error('Authentication error:', err);
-      if (isSignUp) {
-        setError(`Sign up error: ${err.response?.data?.message || err.message}. Please check your details and try again.`);
-      } else {
-        setError(`Log in error: ${err.response?.data?.message || err.message}. Please check your details and try again.`);
-      }
+      setError('Log in error. Please check your details and try again.');
     }
   };
 

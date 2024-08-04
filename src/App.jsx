@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MyCollectionPage from "./pages/MyCollectionPage";
@@ -6,15 +7,18 @@ import VerifyEmail from "./pages/VerifyEmail";
 import './styles/index.css';
 
 function App() {
+  const [token, setToken] = React.useState(localStorage.getItem('token'));
+
   return (
     <Routes>
-      <Route path="/" element={<Template />} >
-        <Route index element={<HomePage />} />
-        <Route path="collection" element={<MyCollectionPage username="Popey" />} />
-        <Route path="verify-email" element={<VerifyEmail />} /> {/* Add this route */}
+      <Route path="/" element={<Template />}>
+        <Route index element={<HomePage setToken={setToken} />} />
+        <Route path="collection" element={<MyCollectionPage token={token} />} />
+        <Route path="verify-email" element={<VerifyEmail />} />
       </Route>
     </Routes>
   );
 }
 
 export default App;
+

@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import vhsImage from '../assets/vhs.jpg';
+import CollectionManager from '../components/CollectionManager';
+import { getCollectionItems } from '../services/api';
 
-export default function MyCollectionPage() {
+export default function MyCollectionPage({ token }) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/'); // Redirect to home page if not logged in
+    } else {
+      fetchCollectionItems();
+    }
+  }, [token, navigate]);
+
+  const fetchCollectionItems = async () => {
+    try {
+      const items = await getCollectionItems(token);
+      setItems(items);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching collection items:', error);
+    }
+  };
+
+  if (!token) {
+    return <p>Redirecting...</p>;
+  }
+
   return (
     <div className="collection-page-container">
       <h1>Welcome, [username]</h1>
@@ -9,29 +38,13 @@ export default function MyCollectionPage() {
         <img src={vhsImage} alt="VHS" className="collection-image" />
       </div>
       <div className="collection-container">
-        <ul className="collection-list">
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
-        <form className="collection-form">
-          <select>
-            <option value="vinyl">Vinyl</option>
-            <option value="cd">CD</option>
-            <option value="dvd">DVD</option>
-            <option value="blu-ray">Blu-ray</option>
-            <option value="vhs">VHS</option>
-            <option value="cassette">Cassette</option>
-            <option value="boxset">Boxset</option>
-          </select>
-          <input type="text" placeholder="Title" />
-          <input type="text" placeholder="Artist" />
-          <button type="submit">Add to Collection</button>
-        </form>
+        {loading ? (
+          <p>Loading your collection...</p>
+        ) : (
+          <CollectionManager items={items} setItems={setItems} token={token} />
+        )}
       </div>
     </div>
   );
 }
-
-
 

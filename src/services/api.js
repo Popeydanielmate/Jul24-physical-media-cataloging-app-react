@@ -54,3 +54,31 @@ export const getCollectionItems = async (token) => {
   }
 };
 
+export const updateCollectionItem = async (itemId, itemData, token) => {
+  try {
+    const response = await api.put(`/collections/${itemId}`, itemData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating collection item:', error);
+    throw error;
+  }
+};
+
+export const deleteCollectionItem = async (itemId, token) => {
+  try {
+    const response = await api.delete(`/collections/${itemId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting collection item:', error);
+    throw error;
+  }
+};
+
