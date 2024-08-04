@@ -12,6 +12,7 @@ export default function HomePage() {
     password: '',
   });
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); 
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -26,13 +27,14 @@ export default function HomePage() {
       if (isSignUp) {
         const response = await registerUser({ username, email, password });
         console.log('User registered successfully:', response);
+        setSuccessMessage('Sign-up successful. Please check your email to verify your account.');
       } else {
         const response = await loginUser({ email, password });
         console.log('User logged in successfully:', response);
         localStorage.setItem('token', response.token); // Save token to local storage
         navigate('/my-collection'); // Redirect to collection page
       }
-      setError(null); // Clear any previous errors
+      setError(null); 
     } catch (err) {
       console.error('Authentication error:', err);
       setError('Log in error. Please check your details and try again.');
@@ -55,6 +57,7 @@ export default function HomePage() {
               onSubmit={onSubmit}
               error={error}
             />
+            {successMessage && <p className="success-message">{successMessage}</p>}
             <button className="toggle-button" onClick={() => setIsSignUp(!isSignUp)}>
               {isSignUp ? 'Switch to Log In' : 'Switch to Sign Up'}
             </button>

@@ -9,16 +9,21 @@ import './styles/index.css';
 function App() {
   const [token, setToken] = React.useState(localStorage.getItem('token'));
 
+  React.useEffect(() => {
+    console.log('App loaded. Token:', token);
+  }, [token]);
+
   return (
     <Routes>
       <Route path="/" element={<Template />}>
         <Route index element={<HomePage setToken={setToken} />} />
-        <Route path="collection" element={<MyCollectionPage token={token} />} />
         <Route path="verify-email" element={<VerifyEmail />} />
-      </Route>
+        <Route path="collection" element={<MyCollectionPage token={token} />} />
+        </Route>
     </Routes>
   );
 }
 
 export default App;
+
 

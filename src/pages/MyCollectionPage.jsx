@@ -11,7 +11,7 @@ export default function MyCollectionPage({ token }) {
 
   useEffect(() => {
     if (!token) {
-      navigate('/'); // Redirect to home page if not logged in
+      navigate('/');
     } else {
       fetchCollectionItems();
     }

@@ -13,7 +13,7 @@ export default function VerifyEmail() {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/verify-email?token=${token}`);
         setMessage(response.data.message);
       } catch (error) {
-        setMessage(error.response.data.message);
+        setMessage(error.response?.data?.message || 'Error verifying email');
       }
     };
 
@@ -26,3 +26,4 @@ export default function VerifyEmail() {
     </div>
   );
 }
+
