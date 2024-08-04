@@ -24,15 +24,19 @@ export default function HomePage() {
       if (isSignUp) {
         const response = await registerUser({ username, email, password });
         console.log('User registered successfully:', response);
+        setError('User registered successfully. Please check your email to verify your account.');
       } else {
         const response = await loginUser({ email, password });
         console.log('User logged in successfully:', response);
-        // Handle storing the token and user redirection
+        setError(null); 
       }
-      setError(null); // Clear any previous errors
     } catch (err) {
       console.error('Authentication error:', err);
-      setError('Authentication failed. Please check your details and try again.');
+      if (isSignUp) {
+        setError(`Sign up error: ${err.response?.data?.message || err.message}. Please check your details and try again.`);
+      } else {
+        setError(`Log in error: ${err.response?.data?.message || err.message}. Please check your details and try again.`);
+      }
     }
   };
 
