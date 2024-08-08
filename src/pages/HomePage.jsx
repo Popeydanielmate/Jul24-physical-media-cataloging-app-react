@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
 import { registerUser, loginUser } from '../services/api';
 import LoginForm from '../components/LoginForm';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function HomePage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -12,7 +13,7 @@ export default function HomePage() {
     password: '',
   });
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); 
+  const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -32,9 +33,9 @@ export default function HomePage() {
         const response = await loginUser({ email, password });
         console.log('User logged in successfully:', response);
         localStorage.setItem('token', response.token); // Save token to local storage
-        navigate('/my-collection'); // Redirect to collection page
+        navigate('/collection'); // Redirect to collection page
       }
-      setError(null); 
+      setError(null);
     } catch (err) {
       console.error('Authentication error:', err);
       setError('Log in error. Please check your details and try again.');
@@ -67,3 +68,4 @@ export default function HomePage() {
     </div>
   );
 }
+

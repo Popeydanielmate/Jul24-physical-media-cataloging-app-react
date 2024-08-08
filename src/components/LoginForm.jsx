@@ -49,14 +49,14 @@ export function LoginContainer({ setToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Submitting login form:', formData); // Log form data
+      console.log('Submitting login form:', formData); 
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, formData);
-      console.log('Login response:', response.data); // Log response data
+      console.log('Login response:', response.data); 
       setToken(response.data.token);
       localStorage.setItem('token', response.data.token);
-      setError(''); // Clear any previous errors
+      setError(''); 
     } catch (err) {
-      console.error('Login error:', err.response || err.message); // Log error
+      console.error('Login error:', err.response || err.message); 
       setError('Log in error. Please check your details and try again.');
     }
   };
