@@ -9,6 +9,7 @@ const api = axios.create({
 export const registerUser = async (userData) => {
   try {
     const response = await api.post('/auth/register', userData);
+    console.log('Register response:', response.data); // Log response data
     return response.data;
   } catch (error) {
     console.error('Error registering user:', error);
@@ -19,6 +20,7 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await api.post('/auth/login', userData);
+    console.log('Login response:', response.data); // Log response data
     return response.data;
   } catch (error) {
     console.error('Error logging in user:', error);
@@ -26,13 +28,29 @@ export const loginUser = async (userData) => {
   }
 };
 
-export const addCollectionItem = async (itemData, token) => {
+export const getUserDetails = async (token) => {
   try {
-    const response = await api.post('/collections', itemData, {
+    const response = await api.get('/auth/user', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log('Get user details response:', response.data); // Log response data
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    throw error;
+  }
+};
+
+export const addCollectionItem = async (itemData, token) => {
+  try {
+    const response = await api.post('/collection', itemData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log('Add item response:', response.data); // Log response data
     return response.data;
   } catch (error) {
     console.error('Error adding collection item:', error);
@@ -42,11 +60,12 @@ export const addCollectionItem = async (itemData, token) => {
 
 export const getCollectionItems = async (token) => {
   try {
-    const response = await api.get('/collections', {
+    const response = await api.get('/collection', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log('Get items response:', response.data); // Log response data
     return response.data;
   } catch (error) {
     console.error('Error fetching collection items:', error);
@@ -56,7 +75,7 @@ export const getCollectionItems = async (token) => {
 
 export const updateCollectionItem = async (itemId, itemData, token) => {
   try {
-    const response = await api.put(`/collections/${itemId}`, itemData, {
+    const response = await api.put(`/collection/${itemId}`, itemData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -70,7 +89,7 @@ export const updateCollectionItem = async (itemId, itemData, token) => {
 
 export const deleteCollectionItem = async (itemId, token) => {
   try {
-    const response = await api.delete(`/collections/${itemId}`, {
+    const response = await api.delete(`/collection/${itemId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
