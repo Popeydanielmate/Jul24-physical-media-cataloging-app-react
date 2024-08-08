@@ -27,7 +27,7 @@ export default function HomePage() {
       if (isSignUp) {
         const response = await registerUser({ username, email, password });
         console.log('User registered successfully:', response);
-        setSuccessMessage('Sign-up successful. Please check your email to verify your account.');
+        setSuccessMessage('Sign-up successful. Please check your email.');
       } else {
         const response = await loginUser({ email, password });
         console.log('User logged in successfully:', response);
