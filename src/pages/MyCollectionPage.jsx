@@ -40,16 +40,20 @@ export default function MyCollectionPage({ token, setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Attempting to add item:', { title, artist, format }); // Log data before sending
+  
     try {
       const newItem = await addCollectionItem({ title, artist, format }, token);
+      console.log('Item added successfully:', newItem); // Log the successful addition
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
       setFormat('');
     } catch (error) {
-      console.error('Error adding collection item:', error);
+      console.error('Error adding collection item:', error); // Log any error that occurs
     }
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');

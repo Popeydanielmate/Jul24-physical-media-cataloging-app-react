@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
-import videoStoreImage from '../assets/video-store.jpg';  
-import vinylShelvesImage from '../assets/vinyl-shelves.jpg';  
+import videoStoreImage from '../assets/video-store.jpg';
+import vinylShelvesImage from '../assets/vinyl-shelves.jpg';
 import { registerUser, loginUser } from '../services/api';
 import LoginForm from '../components/LoginForm';
 import { useNavigate } from 'react-router-dom';
@@ -28,18 +28,15 @@ export default function HomePage({ token, setToken }) {
     try {
       if (isSignUp) {
         const response = await registerUser({ username, email, password });
-        console.log('User registered successfully:', response);
         setSuccessMessage('Sign-up successful. Please check your email.');
       } else {
         const response = await loginUser({ email, password });
-        console.log('User logged in successfully:', response);
         localStorage.setItem('token', response.token);
         setToken(response.token);
         navigate('/collection');
       }
       setError(null);
     } catch (err) {
-      console.error('Authentication error:', err);
       setError('Log in error. Please check your details and try again.');
     }
   };
@@ -56,16 +53,9 @@ export default function HomePage({ token, setToken }) {
         <div className="home-text">
           <h1>Track your vinyl, CDs, and more!</h1>
           <div className="image-container">
-            <img src={cassetteImage} alt="Cassette" className="home-image" />
+            <img src={cassetteImage} alt="Cassette" className="cassette-image" />
           </div>
-          {token ? (
-            <div className="logged-in-content">
-              <img src={videoStoreImage} alt="Video Store" className="home-image" />
-              <p>Sign up with us now to catalog and value your physical media collection, calculate how much it is worth, and coming soon: a message board to buy, swap, sell, and connect with other collectors.</p>
-              <img src={vinylShelvesImage} alt="Vinyl Shelves" className="home-image" />
-              <button className="logout-button" onClick={handleLogout}>Log Out</button>
-            </div>
-          ) : (
+          {!token && (
             <div className="form-container">
               <LoginForm
                 isSignUp={isSignUp}
@@ -80,6 +70,14 @@ export default function HomePage({ token, setToken }) {
               </button>
             </div>
           )}
+          <div className="new-content">
+            <img src={videoStoreImage} alt="Video Store" className="home-image" />
+            <p>Catalog and value your physical media collection, calculate how much it is worth, and coming soon: a message board to buy, swap, sell, and connect with other collectors.</p>
+            <img src={vinylShelvesImage} alt="Vinyl Shelves" className="home-image" />
+            {token && (
+              <button className="logout-button" onClick={handleLogout}>Log Out</button>
+            )}
+          </div>
         </div>
       </div>
     </div>

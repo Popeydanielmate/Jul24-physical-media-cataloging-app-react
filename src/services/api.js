@@ -45,6 +45,7 @@ export const getUserDetails = async (token) => {
 
 export const addCollectionItem = async (itemData, token) => {
   try {
+    console.log('Sending token:', token); 
     const response = await api.post('/collection', itemData, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,6 +58,7 @@ export const addCollectionItem = async (itemData, token) => {
     throw error;
   }
 };
+
 
 export const getCollectionItems = async (token) => {
   try {

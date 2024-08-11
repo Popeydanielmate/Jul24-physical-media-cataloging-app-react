@@ -72,13 +72,21 @@ header, footer {
   text-align: center; 
 }
 
-.home-image,
-.collection-image {
-  max-width: 50%; 
+.cassette-image {
+  max-width: 40%; /* Reduced size for cassette image */
   height: auto;
 }
 
-/* New Extra Content Styles */
+.home-image,
+.collection-image,
+.extra-image {
+  max-width: 50%; /* Consistent size for all other images */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Extra Content Styles */
 .extra-content {
   display: flex;
   flex-direction: column;
@@ -86,13 +94,6 @@ header, footer {
   gap: 20px;
   margin-top: 30px;
   width: 100%;
-}
-
-.extra-image {
-  width: 80%; 
-  max-width: 600px;
-  height: auto;
-  border-radius: 5px;
 }
 
 .extra-text {
@@ -226,5 +227,3 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
-
-
