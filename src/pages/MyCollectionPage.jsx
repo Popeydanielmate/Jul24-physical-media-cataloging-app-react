@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import vhsImage from '../assets/vhs.jpg';
 import { getCollectionItems, getUserDetails, addCollectionItem } from '../services/api';
 
-export default function MyCollectionPage({ token }) {
+export default function MyCollectionPage({ token, setToken }) {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
@@ -33,21 +32,16 @@ export default function MyCollectionPage({ token }) {
   const fetchCollectionItems = async () => {
     try {
       const items = await getCollectionItems(token);
-      console.log('Fetched items:', items); // Log fetched items
       setItems(items);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching collection items:', error);
-      setLoading(false); // Ensure loading is set to false even on error
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Adding item:', { title, artist, format });
     try {
       const newItem = await addCollectionItem({ title, artist, format }, token);
-      console.log('Added item:', newItem); // Log the added item
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
@@ -57,9 +51,16 @@ export default function MyCollectionPage({ token }) {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+    navigate('/');
+  };
+
   return (
     <div className="collection-page-container">
       <h1>Welcome, {username}</h1>
+      <button className="logout-button" onClick={handleLogout}>Log Out</button>
       <div className="collection-image-container">
         <img src={vhsImage} alt="VHS" className="collection-image" />
       </div>

@@ -18,12 +18,11 @@ function App() {
       <Route path="/" element={<Template />}>
         <Route index element={<HomePage setToken={setToken} />} />
         <Route path="verify-email" element={<VerifyEmail />} />
-        <Route path="collection" element={<MyCollectionPage token={token} />} />
-        </Route>
+        <Route path="collection" element={<MyCollectionPage token={token} setToken={setToken} />} />
+      </Route>
     </Routes>
   );
 }
 
 export default App;
-
 
