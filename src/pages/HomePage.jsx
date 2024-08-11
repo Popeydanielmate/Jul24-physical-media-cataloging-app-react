@@ -26,7 +26,7 @@ export default function HomePage({ token, setToken }) {
     e.preventDefault();
     try {
       if (isSignUp) {
-        const response = await registerUser({ username, email, password });
+        await registerUser({ username, email, password }); 
         setSuccessMessage('Sign-up successful. Please check your email.');
       } else {
         const response = await loginUser({ email, password });
@@ -36,9 +36,11 @@ export default function HomePage({ token, setToken }) {
       }
       setError(null);
     } catch (err) {
+      console.error('Authentication error:', err);
       setError('Log in error. Please check your details and try again.');
     }
   };
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');

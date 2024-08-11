@@ -19,7 +19,7 @@ export default function MyCollectionPage({ token, setToken }) {
       fetchUserDetails();
       fetchCollectionItems();
     }
-  }, [token, navigate]);
+  }, [token, navigate, fetchUserDetails, fetchCollectionItems]);
 
   const fetchUserDetails = async () => {
     try {
