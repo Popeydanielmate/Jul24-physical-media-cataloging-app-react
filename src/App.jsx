@@ -16,7 +16,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Template />}>
-        <Route index element={<HomePage setToken={setToken} />} />
+        <Route index element={<HomePage token={token} setToken={setToken} />} />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="collection" element={<MyCollectionPage token={token} setToken={setToken} />} />
       </Route>

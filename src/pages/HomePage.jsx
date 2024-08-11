@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import cassetteImage from '../assets/cassette.jpg';
 import videoStoreImage from '../assets/video-store.jpg';  
 import vinylShelvesImage from '../assets/vinyl-shelves.jpg';  
@@ -59,14 +59,12 @@ export default function HomePage({ token, setToken }) {
             <img src={cassetteImage} alt="Cassette" className="home-image" />
           </div>
           {token ? (
-            <>
-              <div className="new-content">
-                <img src={videoStoreImage} alt="Video Store" className="home-image" />
-                <p>Sign up with us now to catalog and value your physical media collection, calculate how much it is worth, and coming soon: a message board to buy, swap, sell, and connect with other collectors.</p>
-                <img src={vinylShelvesImage} alt="Vinyl Shelves" className="home-image" />
-                <button className="logout-button" onClick={handleLogout}>Log Out</button>
-              </div>
-            </>
+            <div className="logged-in-content">
+              <img src={videoStoreImage} alt="Video Store" className="home-image" />
+              <p>Sign up with us now to catalog and value your physical media collection, calculate how much it is worth, and coming soon: a message board to buy, swap, sell, and connect with other collectors.</p>
+              <img src={vinylShelvesImage} alt="Vinyl Shelves" className="home-image" />
+              <button className="logout-button" onClick={handleLogout}>Log Out</button>
+            </div>
           ) : (
             <div className="form-container">
               <LoginForm
