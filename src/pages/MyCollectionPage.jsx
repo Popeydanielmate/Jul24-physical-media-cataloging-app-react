@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import vhsImage from '../assets/vhs.jpg';
 import { getCollectionItems, getUserDetails, addCollectionItem } from '../services/api';
 import { useNavigate } from 'react-router-dom';
-
 
 export default function MyCollectionPage({ token, setToken }) {
   const [items, setItems] = useState([]);
@@ -11,6 +10,24 @@ export default function MyCollectionPage({ token, setToken }) {
   const [artist, setArtist] = useState('');
   const [format, setFormat] = useState('');
   const navigate = useNavigate();
+
+  const fetchUserDetails = useCallback(async () => {
+    try {
+      const user = await getUserDetails(token);
+      setUsername(user.username);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  }, [token]);
+
+  const fetchCollectionItems = useCallback(async () => {
+    try {
+      const items = await getCollectionItems(token);
+      setItems(items);
+    } catch (error) {
+      console.error('Error fetching collection items:', error);
+    }
+  }, [token]);
 
   useEffect(() => {
     if (!token) {
@@ -21,49 +38,29 @@ export default function MyCollectionPage({ token, setToken }) {
     }
   }, [token, navigate, fetchUserDetails, fetchCollectionItems]);
 
-  const fetchUserDetails = async () => {
-    try {
-      const user = await getUserDetails(token);
-      setUsername(user.username);
-    } catch (error) {
-      console.error('Error fetching user details:', error);
-    }
-  };
-
-  const fetchCollectionItems = async () => {
-    try {
-      const items = await getCollectionItems(token);
-      setItems(items);
-    } catch (error) {
-      console.error('Error fetching collection items:', error);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted'); 
-    console.log('Attempting to add item:', { title, artist, format }); 
-    console.log('Title:', title, 'Artist:', artist, 'Format:', format); 
+    console.log('Form submitted');
+    console.log('Attempting to add item:', { title, artist, format });
+    console.log('Title:', title, 'Artist:', artist, 'Format:', format);
 
     if (!title || !format) {
       console.error('Title and Format are required.');
       return;
     }
-  
+
     try {
-      console.log('Token being sent:', token); 
+      console.log('Token being sent:', token);
       const newItem = await addCollectionItem({ title, artist, format }, token);
-      console.log('Item added successfully:', newItem); 
+      console.log('Item added successfully:', newItem);
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
       setFormat('');
     } catch (error) {
-      console.error('Error adding collection item:', error); 
+      console.error('Error adding collection item:', error);
     }
   };
-  
-  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
