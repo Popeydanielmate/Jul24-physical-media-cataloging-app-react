@@ -11,7 +11,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f8ff; /* Light blue background */
+  background-color: #f0f8ff; 
 }
 
 header, footer {
@@ -22,7 +22,7 @@ header, footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow wrapping in small screens */
+  flex-wrap: wrap; 
 }
 
 #headerBranding {
@@ -69,12 +69,12 @@ header, footer {
 .image-container,
 .collection-image-container {
   margin-top: 20px;
-  text-align: center; /* Center-align the container */
+  text-align: center; 
 }
 
 .home-image,
 .collection-image {
-  max-width: 50%; /* Adjust as necessary */
+  max-width: 50%; 
   height: auto;
 }
 
@@ -89,7 +89,7 @@ header, footer {
 }
 
 .extra-image {
-  width: 80%; /* Adjust the size to fit within the content */
+  width: 80%; 
   max-width: 600px;
   height: auto;
   border-radius: 5px;
@@ -107,7 +107,7 @@ header, footer {
 .container {
   width: 90%;
   margin: 20px auto;
-  max-width: 800px; /* Reduced max-width to fit better */
+  max-width: 800px; 
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -129,7 +129,7 @@ form,
   gap: 10px;
   width: 100%;
   max-width: 600px;
-  margin-bottom: 40px; /* Add more space below the form */
+  margin-bottom: 40px; 
 }
 
 input[type="text"],
@@ -165,30 +165,30 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 5px; /* Reduced margin-top */
-  margin-bottom: 40px; /* Add more space below the toggle button */
+  margin-top: 5px; 
+  margin-bottom: 40px;
 }
 
 .toggle-button:hover {
   background-color: #5a6268;
 }
 
-/* Logout Button Styles */
 .logout-button {
-  background-color: #007bff; /* Blue color */
-  color: white;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1em;
-  margin-top: 20px;
-  width: 100%;
+  width: 200px; 
+  margin: 20px auto 0; 
+  display: block; 
 }
 
 .logout-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
+
 
 /* Collection Page Styles */
 .collection-list {
@@ -200,7 +200,7 @@ button:hover {
 }
 
 .collection-list li {
-  background-color: #e2edff; /* Light blue item background */
+  background-color: #e2edff; 
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;

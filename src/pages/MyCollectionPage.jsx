@@ -60,7 +60,6 @@ export default function MyCollectionPage({ token, setToken }) {
   return (
     <div className="collection-page-container">
       <h1>Welcome, {username}</h1>
-      <button className="logout-button" onClick={handleLogout}>Log Out</button>
       <div className="collection-image-container">
         <img src={vhsImage} alt="VHS" className="collection-image" />
       </div>
@@ -113,6 +112,7 @@ export default function MyCollectionPage({ token, setToken }) {
           ))}
         </ul>
       </div>
+      <button className="logout-button" onClick={handleLogout}>Log Out</button>
     </div>
   );
 }
