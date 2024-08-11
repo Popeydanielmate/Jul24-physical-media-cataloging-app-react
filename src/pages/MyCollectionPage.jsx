@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import vhsImage from '../assets/vhs.jpg';
 import { getCollectionItems, getUserDetails, addCollectionItem } from '../services/api';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function MyCollectionPage({ token, setToken }) {
   const [items, setItems] = useState([]);
@@ -40,19 +41,28 @@ export default function MyCollectionPage({ token, setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Attempting to add item:', { title, artist, format }); // Log data before sending
+    console.log('Form submitted'); 
+    console.log('Attempting to add item:', { title, artist, format }); 
+    console.log('Title:', title, 'Artist:', artist, 'Format:', format); 
+
+    if (!title || !format) {
+      console.error('Title and Format are required.');
+      return;
+    }
   
     try {
+      console.log('Token being sent:', token); 
       const newItem = await addCollectionItem({ title, artist, format }, token);
-      console.log('Item added successfully:', newItem); // Log the successful addition
+      console.log('Item added successfully:', newItem); 
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
       setFormat('');
     } catch (error) {
-      console.error('Error adding collection item:', error); // Log any error that occurs
+      console.error('Error adding collection item:', error); 
     }
   };
+  
   
 
   const handleLogout = () => {
