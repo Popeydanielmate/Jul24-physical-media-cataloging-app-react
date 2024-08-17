@@ -11,6 +11,8 @@
     "ebay-api": "^9.1.0",
     "ebay-node-api": "^2.9.0",
     "eslint-config-react-app": "^7.0.1",
+    "fastq": "^1.17.1",
+    "json-schema-traverse": "^1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-pure-modal": "^2.2.5",
@@ -44,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "cross-env": "^7.0.3"
   }
 }
