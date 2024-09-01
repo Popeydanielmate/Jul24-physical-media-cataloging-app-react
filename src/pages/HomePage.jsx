@@ -3,10 +3,9 @@ import cassetteImage from '../assets/cassette.jpg';
 import vinylShelvesImage from '../assets/vinyl-shelves.jpg';
 import { registerUser, loginUser } from '../services/api';
 import LoginForm from '../components/LoginForm';
-import PopUpLogin from '../components/PopUpLogin'; 
 import { useNavigate } from 'react-router-dom';
 
-export default function HomePage({ token, setToken }) {
+export default function HomePage({ token, setToken, handleCollectionClick }) { 
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
@@ -15,7 +14,6 @@ export default function HomePage({ token, setToken }) {
   });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [isPopUpVisible, setIsPopUpVisible] = useState(false); 
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -47,14 +45,6 @@ export default function HomePage({ token, setToken }) {
     localStorage.removeItem('token');
     setToken(null);
     navigate('/');
-  };
-
-  const handleCollectionClick = () => {
-    if (!token) {
-      setIsPopUpVisible(true); 
-    } else {
-      navigate('/collection'); 
-    }
   };
 
   return (
@@ -89,7 +79,6 @@ export default function HomePage({ token, setToken }) {
           </div>
         </div>
       </div>
-      {isPopUpVisible && <PopUpLogin onClose={() => setIsPopUpVisible(false)} onLogin={onSubmit} />}
     </div>
   );
 }
