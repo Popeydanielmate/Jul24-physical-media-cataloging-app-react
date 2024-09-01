@@ -9,9 +9,9 @@
     "axios": "^1.7.3",
     "colorblender": "^2.7.4",
     "ebay-api": "^9.1.0",
-    "ebay-node-api": "^2.9.0",
-    "eslint-config-react-app": "^7.0.1",
+    "ebay-node-api": "^2.8.8",
     "fastq": "^1.17.1",
+    "global-prefix": "^4.0.0",
     "json-schema-traverse": "^1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -47,6 +47,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "prop-types": "^15.8.1",
+    "react-dev-utils": "^12.0.1"
   }
 }
