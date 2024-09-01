@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import VinylIcon from "../assets/vinyl-icon.png";
 import CDIcon from "../assets/cd-icon.png";
 
-export default function Header() {
+export default function Header({ token, handleCollectionClick }) {
   return (
     <header>
       <div id="headerBranding">
@@ -12,7 +12,7 @@ export default function Header() {
       </div>
       <nav id="headerNavbar">
         <NavLink to={"/"}>Home</NavLink>
-        <NavLink to={"/collection"}>My Collection</NavLink>
+        <a href="#" onClick={handleCollectionClick}>My Collection</a> 
       </nav>
     </header>
   );
