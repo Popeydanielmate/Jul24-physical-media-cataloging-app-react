@@ -34,7 +34,6 @@ export default function HomePage({ token, setToken }) {
         const response = await loginUser({ email, password });
         localStorage.setItem('token', response.token);
         setToken(response.token);
-        setIsPopUpVisible(false); 
         navigate('/collection');
       }
       setError(null);
@@ -90,7 +89,6 @@ export default function HomePage({ token, setToken }) {
           </div>
         </div>
       </div>
-
       {isPopUpVisible && <PopUpLogin onClose={() => setIsPopUpVisible(false)} onLogin={onSubmit} />}
     </div>
   );
