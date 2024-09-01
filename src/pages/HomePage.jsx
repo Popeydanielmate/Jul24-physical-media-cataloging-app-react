@@ -3,6 +3,7 @@ import cassetteImage from '../assets/cassette.jpg';
 import vinylShelvesImage from '../assets/vinyl-shelves.jpg';
 import { registerUser, loginUser } from '../services/api';
 import LoginForm from '../components/LoginForm';
+import PopUpLogin from '../components/PopUpLogin'; 
 import { useNavigate } from 'react-router-dom';
 
 export default function HomePage({ token, setToken }) {
@@ -14,6 +15,7 @@ export default function HomePage({ token, setToken }) {
   });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false); 
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -26,12 +28,13 @@ export default function HomePage({ token, setToken }) {
     e.preventDefault();
     try {
       if (isSignUp) {
-        await registerUser({ username, email, password }); 
+        await registerUser({ username, email, password });
         setSuccessMessage('Sign-up successful. Please check your email.');
       } else {
         const response = await loginUser({ email, password });
         localStorage.setItem('token', response.token);
         setToken(response.token);
+        setIsPopUpVisible(false); 
         navigate('/collection');
       }
       setError(null);
@@ -41,11 +44,18 @@ export default function HomePage({ token, setToken }) {
     }
   };
 
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
     navigate('/');
+  };
+
+  const handleCollectionClick = () => {
+    if (!token) {
+      setIsPopUpVisible(true); 
+    } else {
+      navigate('/collection'); 
+    }
   };
 
   return (
@@ -80,6 +90,8 @@ export default function HomePage({ token, setToken }) {
           </div>
         </div>
       </div>
+
+      {isPopUpVisible && <PopUpLogin onClose={() => setIsPopUpVisible(false)} onLogin={onSubmit} />}
     </div>
   );
 }
