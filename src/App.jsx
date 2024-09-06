@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MyCollectionPage from "./pages/MyCollectionPage";
-import Template from "./pages/_TemplatePage";
+import TemplatePage from "./pages/_TemplatePage";
 import VerifyEmail from "./pages/VerifyEmail";
 import PopUpLogin from "./components/PopUpLogin"; 
 import './styles/index.css';
@@ -11,10 +11,6 @@ function App() {
   const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    console.log('App loaded. Token:', token);
-  }, [token]);
 
   const handleCollectionClick = () => {
     if (!token) {
@@ -37,8 +33,8 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/" element={<Template />}>
-          <Route index element={<HomePage token={token} setToken={setToken} handleCollectionClick={handleCollectionClick} />} />
+        <Route path="/" element={<TemplatePage handleCollectionClick={handleCollectionClick} token={token} />}>
+          <Route index element={<HomePage token={token} setToken={setToken} />} />
           <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="collection" element={<MyCollectionPage token={token} setToken={setToken} />} />
         </Route>
@@ -48,3 +44,4 @@ function App() {
 }
 
 export default App;
+
