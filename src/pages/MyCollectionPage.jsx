@@ -47,17 +47,16 @@ export default function MyCollectionPage({ token, setToken }) {
     console.log('Attempting to add item:', { title, artist, format });
     console.log('Title:', title, 'Artist:', artist, 'Format:', format);
 
-    alert('Form submitted');
-
     if (!title || !format) {
       console.error('Title and Format are required.');
       return;
     }
 
     try {
-      console.log('Token being sent:', token);
+      console.log('Preparing to call addCollectionItem with token:', token);
       const newItem = await addCollectionItem({ title, artist, format }, token);
       console.log('Item added successfully:', newItem);
+
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
@@ -119,7 +118,7 @@ export default function MyCollectionPage({ token, setToken }) {
               onChange={(e) => setArtist(e.target.value)}
             />
           </div>
-          <button type="submit" onClick={() => alert('Button clicked')}>Add to Collection</button>
+          <button type="submit" onClick={() => console.log('Button clicked')}>Add to Collection</button>
         </form>
         <ul className="collection-list">
           {items.map((item) => (
