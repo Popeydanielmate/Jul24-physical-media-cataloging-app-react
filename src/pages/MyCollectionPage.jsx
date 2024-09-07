@@ -15,6 +15,7 @@ export default function MyCollectionPage({ token, setToken }) {
     try {
       const user = await getUserDetails(token);
       setUsername(user.username);
+      console.log('User details fetched successfully:', user); // Log user details
     } catch (error) {
       console.error('Error fetching user details:', error);
     }
@@ -24,6 +25,7 @@ export default function MyCollectionPage({ token, setToken }) {
     try {
       const items = await getCollectionItems(token);
       setItems(items);
+      console.log('Collection items fetched successfully:', items); // Log fetched items
     } catch (error) {
       console.error('Error fetching collection items:', error);
     }
@@ -33,6 +35,7 @@ export default function MyCollectionPage({ token, setToken }) {
     if (!token) {
       navigate('/');
     } else {
+      console.log('Fetching user details and collection items...');
       fetchUserDetails();
       fetchCollectionItems();
     }
@@ -43,6 +46,8 @@ export default function MyCollectionPage({ token, setToken }) {
     console.log('Form submitted');
     console.log('Attempting to add item:', { title, artist, format });
     console.log('Title:', title, 'Artist:', artist, 'Format:', format);
+
+    alert('Form submitted');
 
     if (!title || !format) {
       console.error('Title and Format are required.');
@@ -63,6 +68,7 @@ export default function MyCollectionPage({ token, setToken }) {
   };
 
   const handleLogout = () => {
+    console.log('Logging out...');
     localStorage.removeItem('token');
     setToken(null);
     navigate('/');
@@ -113,7 +119,7 @@ export default function MyCollectionPage({ token, setToken }) {
               onChange={(e) => setArtist(e.target.value)}
             />
           </div>
-          <button type="submit">Add to Collection</button>
+          <button type="submit" onClick={() => alert('Button clicked')}>Add to Collection</button>
         </form>
         <ul className="collection-list">
           {items.map((item) => (
