@@ -6,6 +6,8 @@ import TemplatePage from "./pages/_TemplatePage";
 import VerifyEmail from "./pages/VerifyEmail";
 import PopUpLogin from "./components/PopUpLogin"; 
 import './styles/index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function App() {
   const [token, setToken] = React.useState(localStorage.getItem('token'));

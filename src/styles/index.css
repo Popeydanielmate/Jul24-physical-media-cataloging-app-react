@@ -201,11 +201,30 @@ button:hover {
 }
 
 .collection-list li {
-  background-color: #e2edff; 
+  background-color: #e2edff;
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Aligns text and button on the same line */
+  word-break: break-word; /* Prevents long text from overflowing */
 }
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+  font-size: 18px; /* Adjust size of the icon */
+  padding: 0; /* Remove padding to keep the button small */
+  width: auto; /* Ensure the button only takes the width of the icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 /* Footer Styles */
 .footer-info {

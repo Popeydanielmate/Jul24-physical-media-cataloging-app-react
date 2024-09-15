@@ -122,9 +122,12 @@ export default function MyCollectionPage({ token, setToken }) {
         <ul className="collection-list">
           {items.map((item) => (
             <li key={item._id}>
-              {item.title} {item.artist && `by ${item.artist}`} ({item.format})
-              <button onClick={() => handleDelete(item._id)}>Delete</button> 
-            </li>
+            {item.title} {item.artist && `by ${item.artist}`} ({item.format})
+            <button className="delete-button" onClick={() => handleDelete(item._id)}>
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          </li>
+          
           ))}
         </ul>
       </div>
