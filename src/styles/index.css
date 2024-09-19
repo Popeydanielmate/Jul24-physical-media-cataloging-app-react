@@ -73,14 +73,14 @@ header, footer {
 }
 
 .cassette-image {
-  max-width: 40%; /* Reduced size for cassette image */
+  max-width: 40%; 
   height: auto;
 }
 
 .home-image,
 .collection-image,
 .extra-image {
-  max-width: 50%; /* Consistent size for all other images */
+  max-width: 50%; 
   height: auto;
   display: block;
   margin: 0 auto;
@@ -207,8 +207,8 @@ button:hover {
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Aligns text and button on the same line */
-  word-break: break-word; /* Prevents long text from overflowing */
+  align-items: center; 
+  word-break: break-word; 
 }
 
 .delete-button {
@@ -216,9 +216,9 @@ button:hover {
   border: none;
   color: #ff0000;
   cursor: pointer;
-  font-size: 18px; /* Adjust size of the icon */
-  padding: 0; /* Remove padding to keep the button small */
-  width: auto; /* Ensure the button only takes the width of the icon */
+  font-size: 18px; 
+  padding: 0; 
+  width: auto; 
   display: flex;
   align-items: center;
   justify-content: center;
