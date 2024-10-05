@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import vhsImage from '../assets/vhs.jpg';
-import { getCollectionItems, getUserDetails, addCollectionItem, deleteCollectionItem } from '../services/api'; // import deleteCollectionItem
+import { getCollectionItems, getUserDetails, addCollectionItem, deleteCollectionItem } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyCollectionPage({ token, setToken }) {
@@ -9,6 +9,7 @@ export default function MyCollectionPage({ token, setToken }) {
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [format, setFormat] = useState('');
+  const [price, setPrice] = useState('');  
   const navigate = useNavigate();
 
   const fetchUserDetails = useCallback(async () => {
@@ -47,11 +48,12 @@ export default function MyCollectionPage({ token, setToken }) {
     }
 
     try {
-      const newItem = await addCollectionItem({ title, artist, format }, token);
+      const newItem = await addCollectionItem({ title, artist, format, price }, token);  // Include price
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
       setFormat('');
+      setPrice('');  
     } catch (error) {
       console.error('Error adding collection item:', error);
     }
@@ -117,17 +119,28 @@ export default function MyCollectionPage({ token, setToken }) {
               onChange={(e) => setArtist(e.target.value)}
             />
           </div>
+          <div>
+            <label htmlFor="price">Price ($)</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              placeholder="Price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}  
+              required
+            />
+          </div>
           <button type="submit">Add to Collection</button>
         </form>
         <ul className="collection-list">
           {items.map((item) => (
             <li key={item._id}>
-            {item.title} {item.artist && `by ${item.artist}`} ({item.format})
-            <button className="delete-button" onClick={() => handleDelete(item._id)}>
-              <i className="fas fa-trash-alt"></i>
-            </button>
-          </li>
-          
+              {item.title} {item.artist && `by ${item.artist}`} ({item.format}) - ${item.price}
+              <button className="delete-button" onClick={() => handleDelete(item._id)}>
+                <i className="fas fa-trash-alt"></i>
+              </button>
+            </li>
           ))}
         </ul>
       </div>
