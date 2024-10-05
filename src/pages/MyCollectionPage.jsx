@@ -10,6 +10,7 @@ export default function MyCollectionPage({ token, setToken }) {
   const [artist, setArtist] = useState('');
   const [format, setFormat] = useState('');
   const [price, setPrice] = useState('');  
+  const [totalPrice, setTotalPrice] = useState(0);  
   const navigate = useNavigate();
 
   const fetchUserDetails = useCallback(async () => {
@@ -39,6 +40,15 @@ export default function MyCollectionPage({ token, setToken }) {
     }
   }, [token, navigate, fetchUserDetails, fetchCollectionItems]);
 
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      const total = items.reduce((acc, item) => acc + (parseFloat(item.price) || 0), 0);
+      setTotalPrice(total);
+    };
+
+    calculateTotalPrice();
+  }, [items]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +58,7 @@ export default function MyCollectionPage({ token, setToken }) {
     }
 
     try {
-      const newItem = await addCollectionItem({ title, artist, format, price }, token);  // Include price
+      const newItem = await addCollectionItem({ title, artist, format, price }, token);  
       setItems([...items, newItem]);
       setTitle('');
       setArtist('');
@@ -143,6 +153,9 @@ export default function MyCollectionPage({ token, setToken }) {
             </li>
           ))}
         </ul>
+        <div>
+          <strong>Total: ${totalPrice.toFixed(2)}</strong>
+        </div>
       </div>
       <button className="logout-button" onClick={handleLogout}>Log Out</button>
     </div>
